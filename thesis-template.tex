@@ -1,0 +1,183 @@
+%% LaTeX2e class for student theses
+%% thesis-template.cls
+%%
+%% Berlin University of Applied Sciences and Technology
+%% Fachbereich 6: Informatik und Medien
+%% Cognitive Algorithms Lab (calgo-lab)
+%%
+%% Prof. Dr. Felix Bießmann
+%% felix.biessmann@bht-berlin.de
+%%
+%% Version 0.1, 2023-03-26
+%%
+%% -----------------------------------------------------
+
+%% Available languages: english,german
+\documentclass[english, final, table]{calgo-lab-thesis}
+
+
+%% ------------------
+%% | LaTex Packages |
+%% ------------------
+%% (Optional) add others if necessary here
+\usepackage{pifont}
+\usepackage[final]{listings} 
+\usepackage{footnote}
+\usepackage[acronym]{glossaries}
+
+
+%% -------------------------------
+%% | Information about the thesis |
+%% -------------------------------
+
+%% Name of the author
+\author{
+	Firstname Lastname\\
+	\normalsize Matriculation Number: xxxxxx
+}
+
+%% Title of the thesis
+\title{My Fancy Thesis}
+
+%% Type of the thesis
+\thesistype{Master Thesis}
+
+%% The reviewers are the professors that grade your thesis, 'Bießmann' is default
+\reviewerone{Prof. Dr. rer. nat. Felix Bießmann}
+%% reviewer two (can be omitted)
+\reviewertwo{Reviewer 2}
+
+%% The advisor is usually extern and/or a PhD student from our group (can be omitted)
+\advisorone{Advisor 1}
+% The second advisor (can be omitted)
+%\advisortwo{Dipl.-Inform. D}
+
+%% Please enter the start end end time of your thesis
+\editingtime{xx.xx.xxxx}{zz.zz.zzzz}
+
+
+\settitle
+
+%% --------------------------------
+%% | Settings for word separation |
+%% --------------------------------
+
+%% Describe separation hints here.
+%% For more details, see
+%% http://en.wikibooks.org/wiki/LaTeX/Text_Formatting#Hyphenation
+\hyphenation{
+% me-ta-mo-del
+}
+
+%% ---------------
+%% | Bibliography |
+%% ---------------
+
+%% Use biber instead of BibTeX, see README
+\usepackage[style=numeric,maxnames=99,backend=biber]{biblatex}
+\addbibresource{bibentries.bib}
+
+%% --------------
+%% | Glossaries |
+%% --------------
+
+%% Use glossaries (optional)
+\makeglossaries
+%% Load glossary definitions from file
+\loadglsentries{glossentries.tex}
+
+
+%% ====================================
+%% ====================================
+%% ||                                ||
+%% || Beginning of the main document ||
+%% ||                                ||
+%% ====================================
+%% ====================================
+\begin{document}
+
+%% Set PDF metadata
+\setpdf
+
+%% Set the title
+\maketitle
+
+%% The Preamble begins here
+\frontmatter
+
+\setcounter{page}{1}
+\pagenumbering{roman}
+
+%% -------------
+%% | Abstract  |
+%% -------------
+
+%% For theses written in English, an abstract both in English
+%% and German is mandatory.
+%%
+%% For theses written in German, a German abstract is sufficient.
+%%
+%% The text is included from the following files:
+%% - sections/abstract
+
+\includeabstract
+
+%% ----------------------
+%% |  Table of Contents |
+%% ----------------------
+\tableofcontents
+
+\listoffigures
+\listoftables
+
+% print glossary (optional)
+\printglossary[title=Glossar]
+
+\newglossarystyle{mystyle}{%
+	\renewenvironment{theglossary}%
+	{\begin{description}[leftmargin=1.8cm,style=nextline]}{\end{description}}%
+	\renewcommand*{\glossaryheader}{}%
+	\renewcommand*{\glsgroupheading}[1]{}%
+	\renewcommand*{\glossentry}[2]{%
+		\item[\glsentryitem{##1}%
+		\glstarget{##1}{\glossentryname{##1}}]
+		\glossentrydesc{##1}\glspostdescription\space ##2}%
+	\renewcommand*{\subglossentry}[3]{%
+		\glssubentryitem{##2}%
+		\glstarget{##2}{\strut}\space
+		\glossentrydesc{##2}\glspostdescription\space ##3.}%
+	\renewcommand*{\glsgroupskip}{\ifglsnogroupskip\else\indexspace\fi}%
+}
+
+
+% print acronyms (optional)
+\printglossary[type=\acronymtype, title=List of Abbreviations, style=mystyle]
+
+%% -------------
+%% | Main part |
+%% -------------
+
+\mainmatter
+
+% TODO: add sections here
+\include{sections/introduction}
+\include{sections/methodology}
+\include{sections/conclusion}
+
+%% -----------------
+%% |  Bibliography |
+%% -----------------
+
+%% Add entry to the table of contents for the bibliography
+
+\printbibliography[heading=bibintoc]
+
+
+%% --------------
+%% |   Appendix   |
+%% --------------
+% Optional
+\appendix
+\include{sections/appendix}
+
+\end{document}
