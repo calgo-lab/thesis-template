@@ -90,11 +90,13 @@
 %% --------------
 
 % Logos
+\newcommand{\calgolablogo}{logos/calgo-lab-logo.png}
+\newcommand{\calgolablogoscaled}[1]{{\mbox{\includegraphics[width=#1]\calgolablogo}}}
 \newcommand{\bhtlogo}{logos/BHT\_Logo\_horizontal\_Anthrazit\_transparent.pdf}
 \newcommand{\bhtlogoscaled}[1]{{\mbox{\includegraphics[width=#1]\bhtlogo}}}
 
 \titlehead{%
-	\hfill\bhtlogoscaled{0.45\textwidth}
+	\calgolablogoscaled{0.115\textwidth}\hfill\bhtlogoscaled{0.45\textwidth}
 	\textcolor{bhtpetrol}{\rule{\linewidth}{1mm}}
 }
 
